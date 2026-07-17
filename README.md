@@ -1,29 +1,6 @@
 # Linux-Luminarium
 This repository documents my journey through the Linux Luminarium dojo on pwn.college.
 
-linux-luminarium/
-│
-├── README.md
-│
-├── notes/
-│   ├── 01-command-line-basics.md
-│   ├── 02-filesystem-navigation.md
-│   ├── 03-linux-documentation.md
-│   ├── 04-file-globbing.md
-│   ├── 05-pipes-and-redirection.md
-│   └── ...
-│
-├── cheatsheets/
-│   ├── commands.md
-│   ├── redirection.md
-│   └── permissions.md
-│
-├── scripts/
-│
-├── images/
-│
-└── resources
-
 ## Goals
 
 - Learn Linux fundamentals
