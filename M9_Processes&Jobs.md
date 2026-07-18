@@ -1,19 +1,19 @@
-#Processes and Jobs
+# Processes and Jobs
 
-##Listing Processes
+## Listing Processes
 The ps command lists running processes, but the default usage only shows what is active in your current terminal window.
 To see a complete view of every process running on the system, you should use ps -ef or ps aux, which display all processes along with their unique Process ID (PID) and the exact command used to launch them. If the command paths are too long and get cut off at the edge of your screen, you can append ww to the flags (like ps -efww) to force the output to wrap so you can read the full path.
 I have once again renamed /challenge/run to a random filename, and this time made it so that you cannot ls the /challenge directory! But I also launched it, so you can find it in the running process list, figure out the filename, and relaunch it directly for the flag! Good luck!
 Run ps -ef to list all running commands, find the one that says challenge, then run it.
 
-##Killing Processes
+## Killing Processes
 Now, it’s time to terminate your first process! In this challenge, /challenge/run will refuse to run while /challenge/dont_run is running! You must find the dont_run process and kill it. If you fail, pwn.college will disavow all knowledge of your mission. Good luck.
 
 **ps -ef | grep dont_run**
 
 **kill [PID]**
 
-##Killing Misbehaving Processes
+## Killing Misbehaving Processes
 This challenge requires you to clear a “jammed” communication pipe by identifying and terminating a disruptive background process that is flooding it with garbage data. You will use the process listing command to find the Process ID (PID) of the decoy, the kill command to stop it, and then you will read from the pipe while running the challenge program to capture the clean flag.
 
 In this challenge, there’s a decoy process that’s hogging a critical resource — a named pipe (FIFO) at /tmp/flag_fifo into which (like in the Practicing Piping FIFO challenge) /challenge/run wants to write your flag. You need to kill this process.
@@ -40,7 +40,7 @@ Because this decoy process is hogging the pipe, the main challenge program (/cha
 
 To solve this, you need to perform three major tasks: find the bad process, destroy it, and set up a clean reader to catch the flag.
 
-##Step 1: Find the Target (ps -ef)
+## Step 1: Find the Target (ps -ef)
 Before you can kill a process, you need to know its Process ID (PID), which is a unique number Linux assigns to every running program.
 
 The command ps -ef lists every process currently running on the system:
@@ -49,10 +49,10 @@ ps: Process Status.
 -e: Select all processes.
 -f: Full-format listing (shows columns like UID, PID, PPID, and the exact command line string).
 
-###What to look for:
+### What to look for:
 When you run ps -ef, look through the output (specifically the rightmost column labeled CMD) for the line that says /challenge/decoy. Look at the second column (PID) on that same line to find its number (e.g., 1234).
 
-##Step 2: Terminate the Decoy (kill 1234)
+## Step 2: Terminate the Decoy (kill 1234)
 Once you have the PID, you use the kill command to send a termination signal to that specific process.
 
 **kill <PID>**
@@ -61,17 +61,17 @@ Once you have the PID, you use the kill command to send a termination signal to 
 
 This immediately stops the decoy process from writing garbage data to /tmp/flag_fifo, leaving the pipe clean and open for your use.
 
-##Step 3: Listen and Execute (cat /tmp/flag_fifo & /challenge/run)
+## Step 3: Listen and Execute (cat /tmp/flag_fifo & /challenge/run)
 This final line uses a clever Linux trick to handle the "blocking" nature of pipes by combining two commands using &.
 
-###Part A: cat /tmp/flag_fifo &
+### Part A: cat /tmp/flag_fifo &
 cat /tmp/flag_fifo tells the system to read whatever gets dumped into the pipe and print it to your screen.
 
 The & symbol at the end is crucial. It tells Linux to run this cat command in the background.
 
 Why? If you didn't use &, your terminal would freeze right there, waiting indefinitely for data to enter the pipe, and you wouldn't be able to type the next command. By pushing it to the background, the reader is actively listening, but your terminal stays free.
 
-###Part B: /challenge/run
+### Part B: /challenge/run
 The space or semicolon allows you to execute the actual challenge binary.
 Now that the decoy is dead and a reader (cat) is waiting in the background, /challenge/run can safely open /tmp/flag_fifo, write the real flag into it, and exit.
 The moment /challenge/run writes to the pipe, the background cat process catches the data and prints your flag to the screen.
