@@ -19,7 +19,7 @@ This repository documents my journey through the Linux Luminarium dojo on pwn.co
 - [x] Shell Variables
 - [x] Data Manipulation
 - [x] Processes and Jobs
-- [ ] Untangling Users
+- [x] Untangling Users
 - [ ] Perceiving Permissions
 - [ ] Chaining Commands
 - [ ] Terminal Multiplexing
