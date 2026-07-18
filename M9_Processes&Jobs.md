@@ -75,3 +75,31 @@ Why? If you didn't use &, your terminal would freeze right there, waiting indefi
 The space or semicolon allows you to execute the actual challenge binary.
 Now that the decoy is dead and a reader (cat) is waiting in the background, /challenge/run can safely open /tmp/flag_fifo, write the real flag into it, and exit.
 The moment /challenge/run writes to the pipe, the background cat process catches the data and prints your flag to the screen.
+
+## Suspending Processes
+
+You have learned to interrupt processes with Ctrl-C, but there are less drastic measures you can use to get your terminal back! You can suspend processes to the background with Ctrl-Z. In this level, we'll explore how this works and, in the next level, we'll figure out how to resume those suspended processes!
+
+This level's run wants to see another copy of itself running and using the same terminal. How? Use the terminal to launch it, then suspend it, then launch another copy while the first is suspended!
+
+### Step 1:
+**/challenge/run**
+### Step 2:
+press **Ctrl + Z**
+### Step 3:
+again, **/challenge/run**
+It should reveal you the flag!
+
+## Resuming Processes
+Usually, when you suspend processes, you'll want to resume them at some point. Otherwise, why not just terminate them? To resume processes, your shell provides the fg command, a builtin that takes the suspended process, resumes it, and puts it back in the foreground of your terminal.
+
+Go try it out! This challenge's run needs you to suspend it, then resume it. Good luck!
+
+### Step 1:
+**/challenge/run**
+### Step 2:
+press **Ctrl + Z**
+### Step 3:
+**ps -ef** and note the PID of the /challenge/run process**
+### Step 4:
+**fg <PID>** 
