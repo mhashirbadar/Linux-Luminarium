@@ -18,7 +18,7 @@ This repository documents my journey through the Linux Luminarium dojo on pwn.co
 - [x] Practicing Piping
 - [x] Shell Variables
 - [x] Data Manipulation
-- [ ] Processes and Jobs
+- [x] Processes and Jobs
 - [ ] Untangling Users
 - [ ] Perceiving Permissions
 - [ ] Chaining Commands
