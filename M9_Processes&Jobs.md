@@ -95,9 +95,53 @@ Usually, when you suspend processes, you'll want to resume them at some point. O
 
 Go try it out! This challenge's run needs you to suspend it, then resume it. Good luck!
 
+
 ### Step 1:
 **/challenge/run**
 ### Step 2:
 press **Ctrl + Z** it will make your suspend your process i.e. /challenge/run
 ### Step 3:
 fg /challenge/run it will make the process "/challenge/run" a foreground process and you should get your flag!
+
+## Background Processes
+
+You've resumed processes in the foreground with the fg command. You can also resume processes in the background with the bg command! This will allow the process to keep running, while giving you your shell back to invoke more commands in the meantime.
+
+This level's run wants to see another copy of itself running, not suspended, and using the same terminal. How? Use the terminal to launch it, then suspend it, then background it with bg and launch another copy while the first is running in the background!
+
+### Step 1:
+run the command **/challenge/run**
+### Step 2:
+suspend the command by pressing **Ctrl + Z**
+### Step 3:
+run the suspended program i.e. "/challenge/run" in background
+**bg** /challenge/run
+### Step 4:
+launch another copy of "/challenge/run" process while one copy is still running in the background
+**/challenge/run**
+
+## Foregrounding Processes
+
+Imagine that you have a backgrounded process, and you want to mess with it some more. What do you do? Well, you can foreground a backgrounded process with fg just like you foreground a suspended process! This level will walk you through that!
+
+consider a process for e.g. /challenge/run running in the background and we want to foreground this process, for this:
+
+**fg** /challenge/run
+
+### Starting Backgrounded Processes
+Of course, you don't have to suspend processes to background them: you can start them backgrounded right off the bat! It's easy; all you have to do is append a & to the command, like so:
+Now it's your turn to practice! Launch /challenge/run backgrounded for the flag!
+
+### Step 1:
+run the /challenge/run process apprended by a "&" to the command
+**/challenge/run &**
+You should get your flag!
+
+## Process Exit Codes
+Every shell command, including every program and every builtin, exits with an exit code when it finishes running and terminates. This can be used by the shell, or the user of the shell (that's you!) to check if the process succeeded in its functionality (this determination, of course, depends on what the process is supposed to do in the first place).
+
+You can access the exit code of the most recently-terminated command using the special ? variable (don't forget to prepend it with $ to read its value!):
+In this challenge, you must retrieve the exit code returned by /challenge/get-code and then run /challenge/submit-code with that error code as an argument.
+
+* **/challenge/get-code $?**
+* **/challenge/submit-code 1234**
