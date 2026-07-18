@@ -98,8 +98,6 @@ Go try it out! This challenge's run needs you to suspend it, then resume it. Goo
 ### Step 1:
 **/challenge/run**
 ### Step 2:
-press **Ctrl + Z**
+press **Ctrl + Z** it will make your suspend your process i.e. /challenge/run
 ### Step 3:
-**ps -ef** and note the PID of the /challenge/run process**
-### Step 4:
-**fg <PID>** 
+fg /challenge/run it will make the process "/challenge/run" a foreground process and you should get your flag!
